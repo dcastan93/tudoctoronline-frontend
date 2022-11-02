@@ -13,7 +13,10 @@ const especialidades = [
 const especialidadServicios = {};
 
 especialidadServicios.obtenerEspecialidades = () => {
-    return especialidades;
+
+    return new Promise((resolve, reject) =>{
+      resolve(especialidades )
+    }, 2000);
 }
 
 export default especialidadServicios;
