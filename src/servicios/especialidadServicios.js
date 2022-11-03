@@ -20,5 +20,8 @@ especialidadServicios.obtenerEspecialidades =  () => {
 especialidadServicios.buscarEspecialidadPorCriterio =  (query) => {
   return  axios.get("http://localhost:3000/especialidades?nombreEspecialidad="+query);
 };
+especialidadServicios.guardarEspecialidad =  (especialidad) => {
+  return  axios.post("http://localhost:3000/especialidades", especialidad);
+};
 
 export default especialidadServicios;
