@@ -1,22 +1,24 @@
-const especialidades = [
+import axios from "axios";
+
+/*const especialidades = [
   {
     nombre: "Otorrinonaringología",
     descripcion: "Se atiendes problemas de oido y laringe",
-    atiende_solo_Mujeres: false
+    atiende_solo_Mujeres: false, 
   },
   {
     nombre: "Ginecología",
     descripcion: "Se atiendes sistema reproductor femenino",
-    atiende_solo_Mujeres: true 
-  }
-]
+    atiende_solo_Mujeres: true,
+  },
+];*/
 const especialidadServicios = {};
 
-especialidadServicios.obtenerEspecialidades = () => {
-
-    return new Promise((resolve, reject) =>{
-      resolve(especialidades )
-    }, 2000);
-}
+especialidadServicios.obtenerEspecialidades =  () => {
+  return  axios.get("http://localhost:3000/especialidades");
+};
+especialidadServicios.buscarEspecialidadPorCriterio =  (query) => {
+  return  axios.get("http://localhost:3000/especialidades?nombreEspecialidad="+query);
+};
 
 export default especialidadServicios;

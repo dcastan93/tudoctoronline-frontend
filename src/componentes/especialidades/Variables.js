@@ -1,6 +1,4 @@
-const Variables = () =>{
-    return (
-        <div> Hola </div>
-    )
-}
+const Variables = () => {
+  return <div> Hola </div>;
+};
 export default Variables;
