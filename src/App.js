@@ -13,7 +13,7 @@ const App = () =>{
         <Routes>
           <Route path="/" element={<Banner />} exact></Route>
           <Route path="/especialidades" element={<TablaEspecialidades />} exact></Route>
-          <Route path="/especialidadesForm" element={<FormEspecialidades />} exact></Route>
+          <Route path="/especialidades/form/:id" element={<FormEspecialidades />} exact></Route>
         </Routes>
       </BrowserRouter>
     </div>

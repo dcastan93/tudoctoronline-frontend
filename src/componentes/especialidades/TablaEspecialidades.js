@@ -22,18 +22,19 @@ const TablaEspecialidades = () => {
       setEstado(Estados.ERROR);
     }
   };
-  useEffect(()=>{
+  useEffect(() => {
     cargarPagina();
-  }, [])
-  
+  }, []);
+
   const cambiarCriterio = (event) => {
     setCriterio(event.target.value);
   };
-  const buscarEspecialidad = async (event) =>{
-    console.log("me llamaron")
+  const buscarEspecialidad = async (event) => {
+    console.log("me llamaron");
     event.preventDefault();
     try {
-      const respuesta = await especialidadServicios.buscarEspecialidadPorCriterio(criterio);
+      const respuesta =
+        await especialidadServicios.buscarEspecialidadPorCriterio(criterio);
       if (respuesta.data.length > 0) {
         setListadoClientes(respuesta.data);
         console.log("hay datos");
@@ -46,13 +47,13 @@ const TablaEspecialidades = () => {
     } catch {
       setEstado(Estados.ERROR);
     }
-    console.log(criterio)
-  }
+    console.log(criterio);
+  };
   return (
     <div className="container">
       <h3>
         Lista de especialidades
-        <a href="/especialidadesForm" className="btn btn-sm btn-success">
+        <a href="/especialidades/form" className="btn btn-sm btn-success">
           {" "}
           Agregar Nuevo{" "}
         </a>
@@ -66,7 +67,9 @@ const TablaEspecialidades = () => {
           name="criterio"
           placeholder="Buscar por"
         />
-        <button onClick={buscarEspecialidad} className="btn btn-sm btn-primary">Buscar</button>
+        <button onClick={buscarEspecialidad} className="btn btn-sm btn-primary">
+          Buscar
+        </button>
       </form>
       <table className="table table-sm ">
         <thead>
@@ -110,9 +113,12 @@ const TablaEspecialidades = () => {
                 <td>{especialidad.descripcion}</td>
                 <td>{especialidad.atiende_solo_Mujeres ? "Sí" : "No"}</td>
                 <td>
-                  <button className="btn btn-primary btn-sm me-2">
+                  <a
+                    href={"/especialidades/form/" + especialidad._id}
+                    className="btn btn-primary btn-sm me-2"
+                  >
                     Editar
-                  </button>
+                  </a>
                   <button className="btn btn-danger btn-sm">Eliminar</button>
                 </td>
               </tr>
