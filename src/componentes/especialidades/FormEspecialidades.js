@@ -22,18 +22,20 @@ const FormEspecialidades = () => {
   const guardarEspecialidad = async (event) => {
     event.preventDefault();
     try {
-      const especialidadNueva = {
+      const datosEspecialidad = {
         nombreEspecialidad: nombreEspecialidad,
         descripcion: descripcion,
         atiende_solo_Mujeres: atiende_solo_Mujeres,
       };
-      console.log(especialidadNueva);
+      console.log(datosEspecialidad);
       if (id == null) {
-        const respuesta = await especialidadServicios.guardarEspecialidad(especialidadNueva);
+        const respuesta = await especialidadServicios.guardarEspecialidad(
+          datosEspecialidad
+        );
       } else {
         const respuesta = await especialidadServicios.modificarEspecialidad(
           id,
-          especialidadNueva
+          datosEspecialidad
         );
       }
       navigateTo("/especialidades");
@@ -43,30 +45,29 @@ const FormEspecialidades = () => {
   };
   const cargarEspecialidad = async () => {
     try {
-        const respuesta = await especialidadServicios.cargarEspecialidad(id);
-        if (respuesta.status === 200) {
-            setNombreEspecialidad(respuesta.data.nombre);
-            setDescripcion(respuesta.data.descripcion);
-            setAtiende_solo_Mujeres(respuesta.data.atiende_solo_mujeres);
-        }
+      const respuesta = await especialidadServicios.cargarEspecialidad(id);
+      if (respuesta.status === 200) {
+        setNombreEspecialidad(respuesta.data.nombreEspecialidad);
+        setDescripcion(respuesta.data.descripcion);
+        setAtiende_solo_Mujeres(respuesta.data.atiende_solo_Mujeres);
+      }
     } catch (error) {
-        console.log("Ocurrió un error. "+error);
+      console.log("Ocurrió un error. " + error);
     }
-}
+  };
 
-useEffect(()=> {
+  useEffect(() => {
     if (id != null) {
-        setTitulo("Editar");
-        cargarEspecialidad();
+      setTitulo("Editar especialidad");
+      cargarEspecialidad();
+    } else {
+      setTitulo("Nueva especialidad");
     }
-    else {
-        setTitulo("Nueva");
-    }
-}, [])
+  }, []);
 
   return (
     <div className="container">
-      <h3>Nueva especialidad</h3>
+      <h3>{titulo}</h3>
       <form ation="">
         <div className="row">
           <div className="col-3">
@@ -112,7 +113,9 @@ useEffect(()=> {
           >
             Guardar
           </button>
-          <button className="btn btn-sm btn-light">Cancelar</button>
+          <a href="/especialidades" className="btn btn-sm btn-light">
+            Cancelar
+          </a>
         </div>
       </form>
     </div>
