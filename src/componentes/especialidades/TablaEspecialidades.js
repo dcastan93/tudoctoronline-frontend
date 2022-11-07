@@ -5,6 +5,9 @@ const TablaEspecialidades = () => {
   const [listaEspecialidades, setListadoClientes] = useState([]);
   const [estado, setEstado] = useState(Estados.CARGANDO);
   const [criterio, setCriterio] = useState("");
+  const [idBorrar, setIdBorrar] = useState("");
+  const [especialidadBorrar, setEspecialidadBorrar] = useState("");
+
 
   const cargarPagina = async () => {
     try {
@@ -49,6 +52,15 @@ const TablaEspecialidades = () => {
     }
     console.log(criterio);
   };
+  const confirmarBorrado = (id, nombreEspecialidad)=>{
+    setEspecialidadBorrar(nombreEspecialidad);
+    setIdBorrar(id)
+    console.log(id+"....................."+nombreEspecialidad)
+  };
+  const borrarEspecialidad = async() => {
+    await especialidadServicios.borrarEspecialidad(idBorrar)
+    cargarPagina()
+  }
   return (
     <div className="container">
       <h3>
@@ -119,13 +131,58 @@ const TablaEspecialidades = () => {
                   >
                     Editar
                   </a>
-                  <button className="btn btn-danger btn-sm">Eliminar</button>
+                  <button onClick={()=> confirmarBorrado(especialidad._id, especialidad.nombreEspecialidad)} className="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalBorrar">Eliminar</button>
                 </td>
               </tr>
             ))
           )}
         </tbody>
       </table>
+      <div
+        className="modal fade"
+        id="modalBorrar"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabIndex="-1"
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="staticBackdropLabel">
+                Alerta de eliminación
+              </h5>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div className="modal-body">
+              Desea borrar esta especialidad {especialidadBorrar}?
+            </div>
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-light"
+                data-bs-dismiss="modal"
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={borrarEspecialidad}
+                type="button"
+                className="btn btn-danger"
+                data-bs-dismiss="modal"
+              >
+                Borrar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

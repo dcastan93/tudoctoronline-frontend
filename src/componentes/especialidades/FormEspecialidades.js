@@ -68,7 +68,7 @@ const FormEspecialidades = () => {
   return (
     <div className="container">
       <h3>{titulo}</h3>
-      <form ation="">
+      <form onSubmit={guardarEspecialidad}>
         <div className="row">
           <div className="col-3">
             <input
@@ -109,7 +109,7 @@ const FormEspecialidades = () => {
         <div className="mt-3">
           <button
             className="btn btn-sm btn-primary me-2"
-            onClick={guardarEspecialidad}
+            
           >
             Guardar
           </button>
