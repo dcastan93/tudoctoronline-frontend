@@ -27,7 +27,6 @@ const FormEspecialidades = () => {
         descripcion: descripcion,
         atiende_solo_Mujeres: atiende_solo_Mujeres,
       };
-      console.log(datosEspecialidad);
       if (id == null) {
         const respuesta = await especialidadServicios.guardarEspecialidad(
           datosEspecialidad

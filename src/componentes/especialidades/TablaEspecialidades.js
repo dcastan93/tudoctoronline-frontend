@@ -14,9 +14,7 @@ const TablaEspecialidades = () => {
       const respuesta = await especialidadServicios.obtenerEspecialidades();
       if (respuesta.data.length > 0) {
         setListadoClientes(respuesta.data);
-        console.log("hay datos");
         setEstado(Estados.OK);
-        console.log(listaEspecialidades);
       } else {
         console.log("entro pero no hay datos");
         setEstado(Estados.VACIO);
@@ -33,7 +31,6 @@ const TablaEspecialidades = () => {
     setCriterio(event.target.value);
   };
   const buscarEspecialidad = async (event) => {
-    console.log("me llamaron");
     event.preventDefault();
     try {
       const respuesta =
@@ -42,7 +39,6 @@ const TablaEspecialidades = () => {
         setListadoClientes(respuesta.data);
         console.log("hay datos");
         setEstado(Estados.OK);
-        console.log(listaEspecialidades);
       } else {
         console.log("entro pero no hay datos");
         setEstado(Estados.VACIO);
@@ -50,12 +46,11 @@ const TablaEspecialidades = () => {
     } catch {
       setEstado(Estados.ERROR);
     }
-    console.log(criterio);
+  
   };
   const confirmarBorrado = (id, nombreEspecialidad)=>{
     setEspecialidadBorrar(nombreEspecialidad);
     setIdBorrar(id)
-    console.log(id+"....................."+nombreEspecialidad)
   };
   const borrarEspecialidad = async() => {
     await especialidadServicios.borrarEspecialidad(idBorrar)
